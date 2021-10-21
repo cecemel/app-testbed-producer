@@ -20,6 +20,9 @@ defmodule Dispatcher do
   #   Proxy.forward conn, path, "http://resource/themes/"
   # end
 
+  get "/sync/deltas/files/*path" do
+    Proxy.forward conn, path, "http://delta-producer-json-diff-file-publisher-physical-files/files/"
+  end
 
   get "/files/:id/download" do
     Proxy.forward conn, [], "http://file/files/" <> id <> "/download"

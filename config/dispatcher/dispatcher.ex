@@ -21,23 +21,27 @@ defmodule Dispatcher do
   # end
 
   get "/sync/deltas/files/*path" do
-    Proxy.forward conn, path, "http://delta-producer-json-diff-file-publisher-physical-files/files/"
+    Proxy.forward conn, path, "http://delta-producer/files/"
   end
+
+  #Things can get much simpler here: just one match for the file service (post and get)
 
   get "/files/:id/download" do
     Proxy.forward conn, [], "http://file/files/" <> id <> "/download"
   end
 
   post "/files/*path" do
-    forward conn, path, "http://file/files/"
+    Proxy.forward conn, path, "http://file/files/"
   end
+
+  #The file service also responds with json about files, use that instead of the following?
 
   match "/files/*path" do
     Proxy.forward conn, path, "http://resource/files/"
   end
 
   match "_", %{ last_call: true } do
-    send_resp( conn, 404, "Route not found.  See config/dispatcher.ex" )
+    send_resp( conn, 404, "Route not found. See config/dispatcher.ex" )
   end
 
 end

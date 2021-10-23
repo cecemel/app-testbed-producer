@@ -22,7 +22,7 @@ export default [
       }
     },
     callback: {
-      url: 'http://delta-producer-json-diff-file-publisher-physical-files/delta',
+      url: 'http://delta-producer/delta',
       method: 'POST'
     },
     options: {

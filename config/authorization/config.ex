@@ -3,10 +3,29 @@ alias Acl.GraphSpec.Constraint.Resource, as: ResourceConstraint
 alias Acl.GraphSpec, as: GraphSpec
 alias Acl.GroupSpec, as: GroupSpec
 alias Acl.GroupSpec.GraphCleanup, as: GraphCleanup
+alias Acl.GraphSpec.Constraint.Resource.AllPredicates, as: AllPredicates
 
 defmodule Acl.UserGroups.Config do
   def user_groups do
     [
+      # Something about books, for testing purposes
+      %GroupSpec{
+        name: "public",
+        useage: [:write, :read],
+        access: %AlwaysAccessible{},
+        graphs: [ %GraphSpec{
+                    graph:      "http://mu.semte.ch/graphs/public",
+                    constraint: %ResourceConstraint{
+                      source_graph:   "http://mu.semte.ch/application",
+                      resource_types: [
+                        "http://schema.org/Author",
+                        "http://schema.org/Book",
+                      ],
+                      predicates: %AllPredicates{}
+                    }
+        } ]
+      },
+
       # Public files (where stuff gets uploaded)
       %GroupSpec{
         name: "uploaded-files",

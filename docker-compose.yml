@@ -12,7 +12,8 @@ services:
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
   
   database:
-    image: cecemel/mu-authorization:0.6.0-beta.8
+    #image: cecemel/mu-authorization:0.6.0-beta.8
+    image: semtech/mu-authorization:feature-consistency-with-credo
     environment:
       MU_SPARQL_ENDPOINT: "http://triplestore:8890/sparql"
     volumes:
@@ -22,6 +23,10 @@ services:
     image: cecemel/delta-notifier:0.2.0-beta.2
     volumes:
       - ./config/delta:/config
+    environment:
+      DEBUG_TRIPLE_MATCHES_SPEC: true
+      DEBUG_DELTA_SEND:          true
+      DEBUG_DELTA_MATCH:         true
   
   delta-producer:
     image: lblod/delta-producer-json-diff-file-publisher:0.3.0
@@ -34,6 +39,8 @@ services:
       FILES_GRAPH:            "http://mu.semte.ch/graphs/json-diff-files"
       DELTA_INTERVAL_MS:      10000
       PRETTY_PRINT_DIFF_JSON: "true"
+      LOG_INCOMING_DELTA:     "true"
+      LOG_OUTGOING_DELTA:     "true"
     volumes:
       - ./data/files:/share
   

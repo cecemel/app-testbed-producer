@@ -36,7 +36,7 @@ services:
     volumes:
       - ./config/delta:/config
   file:
-    image: semtech/mu-file-service:3.1.0
+    image: semtech/mu-file-service:3.2.0
     volumes:
       - ./data/files:/share
   delta-producer-json-diff-file-publisher-physical-files:

@@ -9,17 +9,46 @@ defmodule Acl.UserGroups.Config do
     [
       # Public files (where stuff gets uploaded)
       %GroupSpec{
-        name: "uploaded-files",
+        name: "uploaded-files-1",
         useage: [:write, :read_for_write, :read],
         access: %AlwaysAccessible{},
         graphs: [ %GraphSpec{
-                    graph: "http://mu.semte.ch/graphs/uploaded-files",
+                    graph: "http://mu.semte.ch/graphs/uploaded-files-1",
                     constraint: %ResourceConstraint{
                       resource_types: [
                         "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject",
                         "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#DataContainer"
                       ]
                     } } ] },
+
+
+      %GroupSpec{
+        name: "uploaded-files-2",
+        useage: [:write, :read_for_write, :read],
+        access: %AlwaysAccessible{},
+        graphs: [ %GraphSpec{
+                    graph: "http://mu.semte.ch/graphs/uploaded-files-2",
+                    constraint: %ResourceConstraint{
+                      resource_types: [
+                        "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject",
+                        "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#DataContainer"
+                      ]
+                    } } ] },
+
+
+      %GroupSpec{
+        name: "uploaded-files-3",
+        useage: [:write, :read_for_write, :read],
+        access: %AlwaysAccessible{},
+        graphs: [ %GraphSpec{
+                    graph: "http://mu.semte.ch/graphs/uploaded-files-3",
+                    constraint: %ResourceConstraint{
+                      resource_types: [
+                        "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject",
+                        "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#DataContainer"
+                      ]
+                    } } ] },
+
 
       # Readonly delta-files
       %GroupSpec{

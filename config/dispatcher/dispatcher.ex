@@ -32,6 +32,10 @@ defmodule Dispatcher do
     forward conn, path, "http://file/files/"
   end
 
+  delete "/files/*path" do
+    forward conn, path, "http://file/files/"
+  end
+
   match "/files/*path" do
     Proxy.forward conn, path, "http://resource/files/"
   end
